@@ -1,0 +1,39 @@
+﻿1. the size of MBR is 512 bytes
+   and it contains the three major pieces 1. the master partition table
+   2. the disk signature 3. master boot code
+
+2. create a file in /etc/rc5.d directory that is runlevel 5.
+
+3. sudo service cron restart 
+
+4. create a partision then formate it with below command 
+   sudo mkfs.ext4 /dev/sdb4
+   Note: here /dev/sdb4 is newly created partision
+
+5. sudo mount /dev/sdb4 /mnt/partition1
+   if we want permanent mount then we have to make this entry to fstab file.
+
+6. sudo useradd test
+   sudo groupadd bootcamp
+   sudo usermod -a -G bootcamp test
+	Note: to check groups test
+
+7. sudo passwd -l test
+
+8. make below changes to /etc/sudoers file
+   test ALL=(ALL) NOPASSWD:ALL
+
+9. sudo deluser --remove-home --backup-to /tmp
+	then enter username
+
+10. tr '[:lower:]' '[:upper:]' < us.txt > ls.txt
+
+11. sudo nice -n -1 vim
+
+12. sudo find / -name telnet
+
+13. telnet 10.1.210.199 22
+    netstat -pan | grep :22
+
+14. sudo crontab -e -u sharique
+    45 23 * * 1 /usr/bin/echo "hello"
