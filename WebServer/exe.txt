@@ -1,0 +1,88 @@
+1. sudo apt-get install apache2
+	create a html page name index.html in directory 
+	/var/www/html/
+	
+	index.html
+	<html>
+	<title> just checking apache</title>
+	<head>
+	<body>
+	sharique masood
+	</body>
+	</head>
+	</html>
+	Now open browser type http://localhost:80 or http://127.0.0.1/ and hit enter
+
+2. sudo apt-get install nginx
+3. The put method completely replace whatever currently exist on tearget URL with something else.
+   with this method you can create a new resouce or overwrite the existing one.
+	eg. 
+		PUT /forums/<new_thread> HTTP/2.0
+		Host: https://tothenew.com/
+
+    The HTTP POST method is used to send user-generated data to the web server. For example,
+    POST method is used when a user comments on a forum or if they upload a profile picture.
+	eg.
+		POST /forums HTTP/2.0
+		Host: https://tothenew.com/
+
+4. Steps:
+	1. we try to connect with a website secured wtith ssl. The browser request that the webserver identify itself.
+	2. The webserver sends the browser a copy of its ssl
+	certificate
+	3. The browser checks to see whether or not it truts the ssl certificate .If so , it send a message to the webserver.				
+        4. The webserver sends back a digitally signed acknowledge to start ssl encryption session.
+
+5. 1. Apache is web server only while nginx is web and proxy server both.
+   2. Apache thread can handle ony one connection while nginx thread handle multiple connection.
+   3. Apache does not handle heavy web traffic while nginx can handle heavy web traffic.
+   4. Apache works on multithreading approach while Nginx works on event driven model.
+   5. Nginx is faster than Apache.
+
+6. with the help of Virtual Host we can run more than one web site on a single server(such as company1.example.com and 
+company2.example.com). Virtual hosts can be "IP-based", meaning that you have a different IP address for every web site.
+
+7. The Document root defines where is your wenbsite pages resides.
+
+8. 1.The SOAP (simple object access protocol) is an XML-based messaging protocol for information exchange amoung computers. 
+	while REST (Representational State Transfer) is a Architecture based web service in which everything is resource.
+   2. SOAP can only work with XML format while REST works with different data format such as Plain text, HTML, XML, JSON, etc.
+   3. SOAP require more bandwidth for its uses while REST does not need much bandwidth when
+       requests are sent to the server.
+   4. SOAP can not make use of REST while REST cam make use of SOAP because REST is an architecture
+       SOAP is an protocol.
+   5. REST can cache lot of request but SOAP dont.
+
+9. HTTP STATUS CODE
+	(Successfull)
+	200: (OK). It means, simply, that the request was received and understood and is being processed.
+
+	(Redirectional)
+	300: (Multiple Choices). It indicates that a resource has moved. The responce will also include a list of location 
+	from which user can select.
+	301: (Moved Permanently). It tells that the resouce is permanenty moved to a new location. the responce will also 
+	include the latest location.
+	302: (Found). It tell that the resource is temporary moves to a new location. The responce will also tell the latest
+	location . and it also say you can carry with the old location.
+	304: (Not Modified). It is sent in response to a request (for a document) that asked for the document only. If there 
+	is a   change in document then it relode the document else just reloade the document from cache.
+
+	307: (Temporary Redirect). It indicates that is sent when a document is temporarily available at a different URL, 
+	while is also returned.
+
+	(Client Error)
+	400: (Bad Request). It indicates that the server did not understand the request due to bad syntax.
+	401: (Unauthorized). It indicates that before a resource can be accessed, the client must be authorised by the server.
+	403: (Forbidden). It indicates that the client cannot access the requested resource.
+	
+	404: (Not Found). It indicates that the requested resource was not found at the URL given.
+	
+	(Server Error)
+	500: (internel Server Error). It indicates that the server encountered something it didn't expect and was unable to 
+	complete the request.
+	503: (Service Unavailable). It indicates that the server was unable to complete the request due to a server overload.
+	550: (HTTP Version Not Supported). It indicated in the request is no supported. The response should indicate which HTTP 
+	versions are supported.
+
+
+
