@@ -1,0 +1,146 @@
+1. Web Server is designed to serve HTTP Content. while Application Server can also serve HTTP Content but is not limited to just
+   HTTP. It can be provided other protocol support such as RMI/RPC.
+   The main purpose of a web server is to make the static content accessible for the users to view on the web browsers. The job
+   of an application server is to host and expose business logic applications and processes using several different protocols. It
+   works in conjunction with the web server.
+
+2.Application Server
+	-- Oracle WebLogic
+	-- WebSphere Application Server
+	-- Oracle GlassFish Server
+	-- Red Hat JBoss Enterprise Application Platform
+  Web Server
+	-- Apache http Server
+	-- Nginx
+	-- Lighttpd
+        -- Microsoft IIS
+
+3. Java Servlets are programs that run on a Web or Application server and act as a middle layer between a requests coming from a
+   Web browser or other HTTP client and databases or applications on the HTTP server.Since a servlet is integrated with the Java
+   language, it also possesses all the Java features such as high portability, platform independence, security and Java database
+   connectivity.
+
+4. Tomcat Directory Structure
+	
+	/bin -- Startup/shutdown scripts for tomcat and also consists of JAR files with classes required to control tomcat
+	        server.
+	/conf -- Configuration files, including modules.xml, server.xml, and a number of apps-<name>.xml.
+	/lib -- Jar files that are used for starting and stopping Tomcat.
+	/logs -- This is where Tomcat places its log files by default.
+	/temp -- Temporary File Storage.
+	/webapps -- Sample web applications. Any .war files placed here will be automatically expanded.
+ 	/work -- Tomcat`s working directory where Tomcat places all servlets that are generated from JSPs.
+        /classes -- Any class that you add to this directory will find its place in Tomcat's classpath. 
+
+5. #vim /opt/tomcat/conf/server.xml
+	--Here change----
+
+	<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+
+	--change connector port to any port you want eg. 8082------
+	
+	<Connector port="8082" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+	
+	Save and exit.
+	Go to browser
+ 	type http://http://127.0.0.1:8082/
+
+6. Installing Tomcat
+
+   #wget http://mirrors.fibergrid.in/apache/tomcat/tomcat-8/v8.5.34/bin/apache-tomcat-8.5.34.tar.gz
+   #tar xvzf apache-tomcat-8.5.34.tar.gz 
+   #sudo mv apache-tomcat-8.5.34 /opt/tomcat
+
+   --Run tomcat by following command
+	#$CATALINA_HOME/bin/startup.sh 
+
+   Instaling Nginx
+   
+   #sudo apt-get install nginx
+   
+   --Now go to /etc/nginx/conf
+	create a tomcat-proxy-pass.conf file and add following line
+	
+	server {
+  		listen 80;
+  		server_name tomcatproxy.com;
+ 
+      location / {
+    		proxy_pass http://127.0.0.1:8082/;
+   		}
+	}
+
+
+	Note: Here tomcat is running on port 8082 and nginx is runnning on port 80
+
+7. Add a tomcat user
+   sudo useradd -d /opt/tomcat tomcat
+
+  Download tomcat and extract it to /opt/tomcat directory
+  wget http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.38/bin/apache-tomcat-8.5.38.zip 
+  unzip apache-tomcat-8.5.38.zip -d tomcat
+
+  Give tomcat user directory ownership
+  sudo chown -R tomcat: /opt/tomcat
+
+  Make script executable in bin directory of tomcat
+  sudo sh -c 'chmod +x /opt/tomcat/bin/*.sh'
+
+  Create a systemd unit file
+  
+  sudo vim /etc/systemd/system/tomcat.service
+
+  [Unit]
+  Description=Tomcat 8 servlet container
+  After=network.target
+
+  [Service]
+  Type=forking
+
+  User=tomcat
+  Group=tomcat
+
+  Environment="JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"
+  Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
+
+  Environment="CATALINA_BASE=/opt/tomcat"
+  Environment="CATALINA_HOME=/opt/tomcat"
+  Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+  Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+  ExecStart=/opt/tomcat/bin/startup.sh
+  ExecStop=/opt/tomcat/bin/shutdown.sh
+
+  [Install]
+  WantedBy=multi-user.target
+
+
+  save and exit
+  now reload the systemd daemon
+  sudo systemctl daemon-reload
+  
+  Now start the tomcat
+  sudo systemctl start tomcat
+
+8. Download the mysql-connector
+   sudo wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.15.tar.gz
+   
+   extract this tar to tomcat/lib/ directory
+   sudo tar -zvxf mysql-connector-java-8.0.15.tar.gz -C /opt/tomcat/lib/
+
+   write this in your context.xml file Note: here test  is database name
+   
+   <?xml version="1.0" encoding="UTF-8"?>
+   <Context>
+    <Resource
+        name="jdbc/test" type="javax.sql.DataSource"
+        maxActive="100" maxIdle="30" maxWait="10000" 
+        url="jdbc:mysql://localhost:3306/test"
+        driverClassName="com.mysql.jdbc.Driver"
+        username="root" password="ttn"
+     />
+   </Context>
