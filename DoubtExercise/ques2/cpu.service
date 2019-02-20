@@ -1,0 +1,7 @@
+[Unit]
+Description=This will take current system cpu and memory usage into a file
+
+[Service]
+User=root
+ExecStart=/home/sharique/process.sh
+

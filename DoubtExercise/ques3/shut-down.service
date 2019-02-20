@@ -1,0 +1,9 @@
+[Unit]
+Description=This will take current system cpu and memory usage into a file after system shutdown or reboot
+Before=shutdown.target reboot.target
+
+[Service]
+User=root
+ExecStart=/bin/true
+ExecStop=/home/sharique/process.sh
+

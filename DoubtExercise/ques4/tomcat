@@ -1,0 +1,15 @@
+upstream tomcat {
+    server 127.0.0.1:8080;    
+    server 127.0.0.1:8085;
+}
+server {
+    listen 80;
+    listen [::]:80;
+    server_name  tomcat.com www.tomcat.com;
+
+    location / {
+       proxy_pass http://tomcat;
+    }
+
+}
+

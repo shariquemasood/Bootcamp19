@@ -1,0 +1,27 @@
+SQL mode in MySql affect the syntax MySql supports and data validation check it performs. This makes it easier to use MySQL in different environments and to use MySQL together with other database servers. 
+
+Get the seesion sql mode
+
+	SELECT @@SESSION.SQL_MODE;
+
+Get the global sql mode
+
+	SELECT @@GLOBAL.SQL_MODE;
+
+The NO_ENGINE_SUBSTITUTION  sql mode in Mysql denotes that if the engine is not available it does not point to default engine mode
+simply it gives error;
+
+Set the session sql mode to NO_ENGINE_SUBSTITUTION
+
+   SET sql_mode='NO_ENGINE_SUBSTITUTION';
+
+Setting it in configuration file
+
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+	
+	[mysqld]
+	
+	sql_mode        = "NO_ENGINE_SUBSTITUTION"
+
+
+restert the mysql service
