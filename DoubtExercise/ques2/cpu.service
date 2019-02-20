@@ -5,3 +5,5 @@ Description=This will take current system cpu and memory usage into a file
 User=root
 ExecStart=/home/sharique/process.sh
 
+[Install]
+WantedBy=multi-user.target

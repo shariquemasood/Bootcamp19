@@ -7,3 +7,5 @@ User=root
 ExecStart=/bin/true
 ExecStop=/home/sharique/process.sh
 
+[Install]
+WantedBy=multi-user.target
