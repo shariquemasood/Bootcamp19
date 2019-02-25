@@ -98,7 +98,7 @@ Steps:
 		mysql> GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'your_password';
 		mysql> FLUSH PRIVILEGES;
 		mysql> FLUSH TABLES WITH READ LOCK;
-		mysql> SHOW MASTERSTATUS;         Note: Copy the file and location id we need it in slave configuration
+		mysql> SHOW MASTER STATUS;         Note: Copy the file and location id we need it in slave configuration
 		mysql> quit;
 		
 		#mysqldump -u root -p --all-databases --master-data > /root/dbdump.db
