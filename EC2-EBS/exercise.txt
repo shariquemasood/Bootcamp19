@@ -8,7 +8,7 @@
    than HVM guests in many cases, but because of enhancements in HVM virtualization and the 
    availability of PV drivers for HVM AMIs, this is no longer true.
 
-2. Firt check the security group that allw inbount connection
+2. Firt check the security group that allow inbound connection
    Second Network ACL rule that allow inbound and outbount rule for traffic
    Third Subnet(in which you launched your instance)  should associate with route table 
    Four Check ssh port is open or not in your security groups
