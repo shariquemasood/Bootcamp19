@@ -1,0 +1,14 @@
+1. when we enter a domain in web browser like www.sharique.com it resolve in Steps
+   1. first it seach the name server in local dns like hosts file if not found then it send
+      the query to ROOT NAME SERVER.
+  
+   2. The ROOT NAME SERVER also dont know the ip of that domain we want but it knows 
+      the name server for TOP LEVEL DOMAIN (TLDs) in our case its .com . The ROOT
+      NAME SERVER answer with the name server that are responsible for .com.
+   
+   3. The TLD also dont know the IP but they do know the name sever for www.sharique.com domin name
+      The TLD name server answer with REGISTRAR NAME SERVER for sharique.com like (ns1 and ns2 )
+   
+   4. The REGISTRAR NAME SERVER store the DNS records for given www.sharique.com they answer with IP.
+      after that the local name server store the cache for next query for certain period of time.
+
