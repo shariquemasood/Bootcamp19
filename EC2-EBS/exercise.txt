@@ -1,0 +1,25 @@
+1. HVM: The hardware virtual machine (HVM) are fully virtualized. 
+   It means that the VMs running on top of their hypervisors are 
+   not aware that they are sharing processing time with other clients on the same hardware.
+
+   PVM: Paravirtual guests can run on host hardware that does not have explicit support 
+   for virtualization, but they cannot take advantage of special hardware extensions such 
+   as enhanced networking or GPU processing. Historically, PV guests had better performance 
+   than HVM guests in many cases, but because of enhancements in HVM virtualization and the 
+   availability of PV drivers for HVM AMIs, this is no longer true.
+
+2. Firt check the security group that allw inbount connection
+   Second Network ACL rule that allow inbound and outbount rule for traffic
+   Third Subnet(in which you launched your instance)  should associate with route table 
+   Four Check ssh port is open or not in your security groups
+   Five Try to check ping your server to check server is reachable or not.
+
+3. aws ec2 run-instances --image-id ami-0ac019f4fcb7cb7e6 --count 1 --instance-type t2.nano --key-name sharique --subnet-id subnet-01b57d2958a671c6f --security-group-ids sg-09b61cdb1629cbbac --user-data file://script.txt --profile ttn-newers --region us-east-1 --associate-public-ip-address
+
+6. Create a new volume with encryption in same az in which you launched your instance.
+   attach the encrypted volume to your instance and copy data from unencrypted volume to
+   encrypted volume.
+
+7. Create a AMI of the that server and launch with a new key. or detach the EBS of that server and Create a new server with new and Attach that ebs to that newely created server.
+
+   

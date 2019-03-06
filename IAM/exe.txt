@@ -1,0 +1,11 @@
+1. Multifactor authentication (MFA) is a security system that requires more 
+   than one method of authentication from independent categories of credentials 
+   to verify the user’s identity for a login or other transaction.
+
+2. An instance profile is a container for an IAM role that you can use to pass role 
+   information to an EC2 instance when the instance starts. When you create an IAM 
+   role using the console, the console creates an instance profile automatically and 
+   gives it the same name as the role it corresponds to.If you use the AWS CLI to create a role, 
+   you create the role and instance profile as separate actions, and you might give them different 
+   names. To launch an instance with an IAM role, you specify the name of its instance profile. 
+   When you launch an instance using the Amazon EC2 console, you can select a role to associate with the instance.
