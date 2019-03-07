@@ -1,0 +1,18 @@
+2. RUN: It execute while building the docker image. Allows you to install your application and packages requited for it.
+   CMD: allows you to set a default command, which will be executed only when you run container without specifying a command.If
+        we specify additional paramter whille running the container it will override the Default command in docker file.
+
+   ENTRYPOINT: 	It also allow you to execute a command while running a container but we can not append/override the entypoint.
+
+Note: Always prefer CMD if you need to provide extra argument to container. and ENTRYPOINT when you need a command which always executed.
+
+3. Open Docker service file
+   sudo vim /lib/systemd/system/docker.service
+
+   add this in execute line
+
+   ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375
+   
+   Now reload the system daemon
+   sudo systemctl daemon-reload
+   sudo service docker restart
